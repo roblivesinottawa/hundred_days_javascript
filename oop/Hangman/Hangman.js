@@ -12,8 +12,20 @@ Hangman.prototype.getPuzzle = function () {
     return puzzle
 }
 
+Hangman.prototype.getGuess = function (guess) {
+    guess = guess.toLowerCase()
+    const isUnique = !this.guessedLetters.includes(guess)
+    const isBadGuess = !this.word.includes(guess)
+
+    if (isUnique) {
+        this.guessedLetters.push(guess)
+    }
+    if (isUnique && isBadGuess) {
+        this.remainingGuesses--
+    }
+}
+
 
 const game1 = new Hangman('dog', 2)
 console.log(game1.getPuzzle())
-const game2 = new Hangman('Toronto', 3)
-console.log(game2.getPuzzle())
+console.log(game1.remainingGuesses)
